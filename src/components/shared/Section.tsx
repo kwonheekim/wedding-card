@@ -6,10 +6,16 @@ const cx = classNames.bind(style);
 interface SectionProps {
   children: React.ReactNode;
   className?: string;
+  title?: string;
 }
 
-const Section: FC<SectionProps> = ({ children, className }) => {
-  return <section className={cx(["container", className])}>{children}</section>;
+const Section: FC<SectionProps> = ({ children, className, title }) => {
+  return (
+    <section className={cx(["container", className])}>
+      {title != null ? <div className={cx("txt-title")}>{title}</div> : null}
+      {children}
+    </section>
+  );
 };
 
 export default Section;
