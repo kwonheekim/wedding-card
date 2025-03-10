@@ -1,24 +1,59 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import classNames from "classnames/bind";
+import styles from "./App.module.scss";
+import { useEffect, useState } from "react";
+import FullScreenMessage from "@shared/FullScreenMessage";
+import Heading from "./components/sections/Heading";
+import Video from "./components/sections/Video";
+
+import { Wedding } from "@models/wedding";
+
+const cx = classNames.bind(styles);
 
 function App() {
+  const [wedding, setWedding] = useState<Wedding | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch("http://localhost:8888/wedding")
+      .then((response) => {
+        if (response.ok === false) {
+          throw new Error("청첩장 정보를 불러오지 못했습니다.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setWedding(data);
+      })
+      .catch((error) => {
+        console.log("에러발생", error);
+        setError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <FullScreenMessage type="loading" />;
+  }
+
+  if (error) {
+    return <FullScreenMessage type="error" />;
+  }
+
+  if (wedding === null) {
+    return null;
+  }
+
+  const { date } = wedding;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={cx("container")}>
+      <Heading date={date} />
+      <Video />
+      {JSON.stringify(wedding)}
     </div>
   );
 }
