@@ -35,6 +35,7 @@ function App() {
         setLoading(false);
       });
   }, []);
+  // aaa
 
   if (loading) {
     return <FullScreenMessage type="loading" />;
@@ -55,7 +56,7 @@ function App() {
       <Heading date={date} />
       <Video />
       <ImageGallery images={galleryImages} />
-      {JSON.stringify(wedding)}
+      {/* {JSON.stringify(wedding)} */}
     </div>
   );
 }
