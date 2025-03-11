@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import classNames from "classnames/bind";
 import style from "./Section.module.scss";
 
@@ -6,7 +6,7 @@ const cx = classNames.bind(style);
 interface SectionProps {
   children: React.ReactNode;
   className?: string;
-  title?: string;
+  title?: React.ReactNode;
 }
 
 const Section: FC<SectionProps> = ({ children, className, title }) => {
