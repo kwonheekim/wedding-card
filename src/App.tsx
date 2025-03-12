@@ -13,6 +13,7 @@ import Map from "./components/sections/Map";
 import Contact from "./components/sections/Contact";
 import Share from "./components/sections/Share";
 import Modal from "./components/shared/Modal";
+import AttendCountModal from "./components/AttendCountModal";
 
 const cx = classNames.bind(styles);
 
@@ -81,21 +82,7 @@ function App() {
       <Map location={location} />
       <Contact groom={groom} bride={bride} />
       <Share groomName={groom.name} brideName={bride.name} date={date} />
-      <Modal
-        open={true}
-        title="현재 참석자"
-        body={
-          <div>
-            <input />
-          </div>
-        }
-        onLeftButtonClick={() => {
-          console.log("left");
-        }}
-        onRightButtonClick={() => {
-          console.log("right");
-        }}
-      />
+      <AttendCountModal wedding={wedding} />
     </div>
   );
 }
