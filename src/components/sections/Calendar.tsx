@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import classNames from "classnames/bind";
 import styles from "./Calendar.module.scss";
 import Section from "@shared/Section";
@@ -50,4 +50,4 @@ const Calendar: FC<CalendarProps> = ({ date }) => {
   );
 };
 
-export default Calendar;
+export default memo(Calendar);

@@ -31,7 +31,10 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images }) => {
               className={cx("wrap-image")}
               onClick={() => handleSlectImage(idx)}
             >
-              <img src={src} alt={`사진첩 이미지`} />
+              <picture>
+                <source srcSet={`${src}.webp`} type="image/webp" />
+                <img src={`${src}.jpg`} alt={`이미지 ${idx}`} />
+              </picture>
             </li>
           ))}
         </ul>

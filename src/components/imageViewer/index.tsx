@@ -35,7 +35,10 @@ const ImageViewer: FC<ImageViewerProps> = ({
       >
         {images.map((src, idx) => (
           <SwiperSlide key={idx}>
-            <img src={src} alt={`이미지 ${idx}`} />
+            <picture>
+              <source srcSet={`${src}.webp`} type="image/webp" />
+              <img src={`${src}.jpg`} alt={`이미지 ${idx}`} />
+            </picture>
           </SwiperSlide>
         ))}
       </Swiper>
